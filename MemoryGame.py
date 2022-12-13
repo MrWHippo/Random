@@ -15,6 +15,7 @@ MaxVisible = 2
 Selected = []
 ids = []
 temp = []
+temp2 = []
 
 idlength = (GridSize**2)/2
 
@@ -27,8 +28,11 @@ def images_id(idlength):
         num  = random.randint(1,6)
         ids.append(num)
     temp = ids
-    for x in range(len(ids)):
-        ids.append(temp[x])
+
+    while len(temp) > 0:
+        num2 = random.randint(0,(len(temp)-1))
+        ids.append(temp[num2])
+        temp.remove(temp[num2])
 
     
 class cell(BoxLayout):
