@@ -10,14 +10,14 @@ from kivy.uix.image import Image
 GridSize = 6
 NumImage = 6
 MaxVisible = 2
-
+rtime = 2
 
 Selected = []
 ids = []
-temp = []
 temp2 = []
 
-idlength = (GridSize**2)/2
+#idlength = (GridSize**2)/2
+idlength = 18
 
 def handle_click(instance):
     if len(Selected) < MaxVisible:
@@ -29,12 +29,18 @@ def images_id(idlength):
         ids.append(num)
     temp = ids
 
-    while len(temp) > 0:
-        num2 = random.randint(0,(len(temp)-1))
-        ids.append(temp[num2])
-        temp.remove(temp[num2])
 
-    
+    while len(temp2) < 18:
+        inside = False
+        num2 = random.randint(0,(len(temp)-1))
+        for nums in temp2:
+            if num2 == nums:
+                inside = True
+        if inside == False:
+            ids.append(temp[num2])
+            temp2.append(num2)
+
+
 class cell(BoxLayout):
     
     def __init__(self, id, time):
@@ -42,17 +48,17 @@ class cell(BoxLayout):
         self.id = id
         self.rtime = time
         self.isperminant = False
-        Image_Location = "assets/image{0}.png".format(id)
+        Image_Location = "assets/elephants {0}.png".format(id)
         self.Image_View = Image(source = Image_Location)
         self.Button_View = Button()
         self.Button_View.bind(on_press=handle_click)
         self.add_widget(self.Button_View)
 
-    def reveal_image(self, time):
+    def reveal_image(self):
         self.remove_widget(self.Button_View)
         self.add_widget(self.Image_View)
         Selected.append(self)
-        Clock.schedule_once(self.hide_image, time)
+        Clock.schedule_once(self.hide_image, self.rtime)
 
 
     def hide_image(self, delta):
@@ -64,7 +70,7 @@ class cell(BoxLayout):
     def check_if_found(self):
         revealed = False
         if len(Selected) == 0:
-            self.reveal_image(self.rtime)
+            self.reveal_image()
         else:
             for x in range(len(Selected)):
                 if self.id == Selected[x].id:
@@ -73,7 +79,7 @@ class cell(BoxLayout):
                     Selected.remove(Selected[x])
                     revealed = True
             if revealed == False:
-                self.reveal_image(self.rtime)
+                self.reveal_image()
             else:
                 revealed = False
                 
@@ -87,7 +93,6 @@ class cell(BoxLayout):
 class application(App):
 
     def build(self):
-        rtime = 3
         layout = GridLayout(cols = GridSize)
         for row in range(GridSize):
             for collumn in range(GridSize):
