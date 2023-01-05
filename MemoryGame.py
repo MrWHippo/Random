@@ -15,6 +15,7 @@ rtime = 2
 Selected = []
 ids = []
 temp2 = []
+temp = []
 
 #idlength = (GridSize**2)/2
 idlength = 18
@@ -27,18 +28,15 @@ def images_id(idlength):
     while len(ids) < idlength:
         num  = random.randint(1,6)
         ids.append(num)
-    temp = ids
+    
+    for x in ids:
+        temp.append(x)
 
+    while len(temp) > 0:
+        randomnum = random.randint(0,(len(temp)-1))
+        ids.append(temp[randomnum])
+        temp.remove(temp[randomnum])
 
-    while len(temp2) < 18:
-        inside = False
-        num2 = random.randint(0,(len(temp)-1))
-        for nums in temp2:
-            if num2 == nums:
-                inside = True
-        if inside == False:
-            ids.append(temp[num2])
-            temp2.append(num2)
 
 
 class cell(BoxLayout):
