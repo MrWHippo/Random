@@ -1,8 +1,6 @@
 
-#sentence = input("Enter Sentence: ").lower()
-#sentence = "sentence ."
-
-file = open("sentence.txt", "r")
+num = int(input("file 1 or 2? :"))
+file = open(f"sentence{num}.txt", "r")
 sentence = file.read().replace('\n', " ")
 
 def letter_counter(sentence):
@@ -13,17 +11,21 @@ def letter_counter(sentence):
 
 
 def tree(s):
-    count = 0
     done = False
     path = {}
     while done == False:
-        count += 1
-        print(count)
-        a = 10
-        b = 10
+        a = 10**32
+        b = 10**32
         for x in s:
             if s[x] < a:
                 if s[x] < b:
+                    try:
+                        Temp = B
+                        temp = b 
+                        A = Temp
+                        a = temp
+                    except:
+                        pass
                     B = x
                     b = s[x]
                 else:
@@ -34,6 +36,7 @@ def tree(s):
         s[A + B] = a+b
         path[A] = (A+B, "1")
         path[B] = (A+B, "0")
+
         if len(s) == 1:
             for k in s:
                 finalpath = k
@@ -59,9 +62,11 @@ sentencedict = letter_counter(sentence)
 path, finalpath = tree(sentencedict)
 
 
-
+total = 0
 for keys in letter_counter(sentence):
-    print( keys ,encode(keys, finalpath))
+    encoded = encode(keys, finalpath)
+    print( keys,"=",encoded)
+    total += len(encoded)
 
 
 codedsentence = ""
@@ -69,6 +74,9 @@ codedsentence = ""
 for letter in sentence:
     codedsentence += encode(letter, finalpath)
 
+meta = 24*len(sentencedict) + total /8
+numbytes = (len(codedsentence) / 8) + meta 
+
 print(codedsentence)
-
-
+print(f"Total Size = {numbytes} bytes")
+print(f"Size of meta = {meta} bytes")
