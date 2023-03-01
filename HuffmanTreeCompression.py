@@ -52,9 +52,9 @@ def encode(char, finalpath):
             return temp
         else:
             if path[char][1][0] == "0":
-                temp += "0"
+                temp = "0" + temp
             else:
-                temp += "1"
+                temp = "1" + temp
             char = path[char][0]
 
 
