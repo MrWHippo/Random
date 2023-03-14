@@ -32,6 +32,7 @@ class NaivePriorityQueue():
                 if emptyvalue == True:
                     self.queue[x-1] = self.queue[x]
                     self.queue[x] = (None, None)
+                    emptyvalue = False
         pass
 
     def dequeue(self):
@@ -39,6 +40,8 @@ class NaivePriorityQueue():
         value = self.queue[position][0]
         self.queue[position] = (None, None)
         self.__fixqueue()
+        self.tail -= 1
+        self.count -=1
         return value
 
     def top(self):

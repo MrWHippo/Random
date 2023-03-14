@@ -18,7 +18,7 @@ class CircularQueue():
         return head
     
     def enqueue(self, item):
-        if self.count < self.capacity:
+        if self.tail < self.capacity:
             self.tail += 1
             self.count += 1
             self.queue[self.tail] = item
