@@ -1,5 +1,5 @@
 
-## num = biggest in array
+## num = biggest in array +1
 
 def count_sort(inputarray, num):
     tally = [0]*num

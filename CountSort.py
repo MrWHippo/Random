@@ -1,6 +1,13 @@
+from random import randint
+inputarray = []
 
-inputarray = [88,73,44,1,8,19,31,63,74,54,19,3,7]
-num = 89
+lenarray = int(input("Enter length of array: "))
+for x in range(lenarray):
+    inputarray.append(randint(1,1000))
+
+#inputarray = [5,4,3,2,1]
+
+num = 1001
 tally = [0]*num
 
 for value in inputarray:
