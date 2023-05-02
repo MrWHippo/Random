@@ -24,7 +24,8 @@ def sort(A):
     right = sort(A[lenA//2:])
     return merge(left,right)
 
-arrayin = [1]
+arrayin = [9,1,3,7,6,6,7,1,4]
+
 if len(arrayin) == 0:
     print("Error, Empty array entered.")
     exit()
