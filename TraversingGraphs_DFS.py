@@ -21,6 +21,9 @@ def printbysortedentry():
     verlist =[]
     for vertex in graph:
         verlist.append([vertex.entry_time, vertex.value])
+        for x in verlist:
+            if x[0] == None:
+                x[0] = float("inf")
         verlist = bubble_sort_2D(verlist)
     print(verlist)
 
@@ -28,8 +31,19 @@ def printbysortedexit():
     verlist = []
     for vertex in graph:
         verlist.append([vertex.exit_time, vertex.value])
+        for x in verlist:
+            if x[0] == None:
+                x[0] = float("inf")
         verlist = bubble_sort_2D(verlist)
     print(verlist)
+
+def ingraph(searchval, graph):
+    count = -1
+    for value in graph:
+        count +=1
+        if value.value == searchval:
+            return count
+    return None
         
 
 graph = []
@@ -41,18 +55,20 @@ while inputting == True:
     if value != "#":
         neighbours = input("Enter neighbours 1,2,3.... : ")
         neighbours = neighbours.split(",")
-        thisNode = node(value)
-        graph.append(thisNode)
+
+        if ingraph(value, graph) == None:
+            thisNode = node(value)
+            graph.append(thisNode)
+        else:
+            thisNode = graph[ingraph(value,graph)]
+            
         for neighbour in neighbours:
-            neighbour_node = node(neighbour)
-            notingraph = True
-            for x in graph:
-                if x == neighbour:
-                    notingraph = False
-            if notingraph == True:
+            if ingraph(neighbour, graph) == None:
+                neighbour_node = node(neighbour)
                 graph.append(neighbour_node)
             else:
-                notingraph = True
+                neighbour_node = graph[ingraph(value,graph)]
+
             thisNode.give_neighbour(neighbour_node)
     else:
         inputting = False
