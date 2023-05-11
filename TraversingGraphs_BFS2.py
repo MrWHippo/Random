@@ -1,10 +1,5 @@
 from Graph import node
 
-
-
-
-
-
 class LinearQueue():
     def __init__(self, capacity):
         self.capacity = capacity
@@ -72,10 +67,11 @@ while inputing:
         inputing = False
 
 
+
 Q = LinearQueue(len(graph)+1)
 Q.enqueue(graph[0])
-
 Been_in_Q = [graph[0]]
+graph[0].placeval = 0
 
 
 while Q.is_empty() == False:
@@ -89,6 +85,6 @@ while Q.is_empty() == False:
             if been_in == False:
                 Q.enqueue(neighbour)
                 Been_in_Q.append(neighbour)
-                neighbour.placeval = 1+ current.placeval
-            
+                neighbour.placeval = 1 + current.placeval
+  
     print(current.value, current.placeval)
