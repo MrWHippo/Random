@@ -6,7 +6,8 @@ from BubbleSortM import bubble_sort_2D
 def visit(vertex):
     vertex.entry_time = time.time()
     for neighbour in vertex.neighbours:
-        if neighbour.entry_time != None:
+        print(neighbour.entry_time, neighbour.value)
+        if neighbour.entry_time == None:
             neighbour.parent = vertex
             visit(neighbour)
     vertex.exit_time = time.time()
@@ -14,7 +15,7 @@ def visit(vertex):
 
 def dfs(Graph):
     for vertex in Graph:
-        if vertex.entry_time != None:
+        if vertex.entry_time == None:
             visit(vertex)
 
 def printbysortedentry():
@@ -74,7 +75,6 @@ while inputting == True:
         inputting = False
             
 
-graph[0].entry_time = 1
 dfs(graph)
 print("Entry")
 printbysortedentry()
