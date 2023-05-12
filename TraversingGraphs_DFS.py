@@ -68,7 +68,7 @@ while inputting == True:
                 neighbour_node = node(neighbour)
                 graph.append(neighbour_node)
             else:
-                neighbour_node = graph[ingraph(value,graph)]
+                neighbour_node = graph[ingraph(neighbour,graph)]
 
             thisNode.give_neighbour(neighbour_node)
     else:
