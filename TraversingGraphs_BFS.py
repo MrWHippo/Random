@@ -1,21 +1,4 @@
-
-#undirected graph
-class node():
-    def __init__(self, selfvalue, neighbour1, neighbour2, neighbour3, neighbour4):
-        self.value = selfvalue
-        self.neighbour1 = neighbour1
-        self.neighbour2 = neighbour2
-        self.neighbour3 = neighbour3
-        self.neighbour4 = neighbour4
-
-    def get_neighbours(self):
-        return self.neighbour1, self.neighbour2, self.neighbour3, self.neighbour4
-
-    def neighbours(self):
-        return [self.neighbour1, self.neighbour2, self.neighbour3, self.neighbour4]
-    
-
-#####
+from Graph import node
 
 class LinearQueue():
     def __init__(self, capacity):
@@ -42,31 +25,63 @@ class LinearQueue():
     
     def is_empty(self):
         return self.queue[self.head] == None
+    
+    def printqueue(self):
+        print(self.queue)
 
-inputing = False #True
-values_array = [node(0,1,None,None,None),node(1,0,None,None,None)]
-count = 8
+
+def ingraph(searchval, graph):
+    count = -1
+    for value in graph:
+        count +=1
+        if value.value == searchval:
+            return count
+    return None
+
+inputing = True
+graph = []
+
+
 while inputing:
     print("Enter # to end")
     value = input("Enter Node: ")
     if value != "#":
-        neighbours = input("Enter neighbours: 1,2,3,4/None: ")
+        neighbours = input("Enter neighbours: ")
         neighbours = neighbours.split(",")
-        values_array.append(node(value, neighbours[0],neighbours[1],neighbours[2],neighbours[3]))
-        count +=1
+
+        if ingraph(value, graph) == None:
+            thisNode = node(value)
+            graph.append(thisNode)
+        else:
+            thisNode = graph[ingraph(value, graph)]
+            
+        for neighbour in neighbours:
+            if ingraph(neighbour, graph) == None:
+                neighbour_node = node(neighbour)
+                graph.append(neighbour_node)
+            else:
+                neighbour_node = graph[ingraph(neighbour,graph)]
+
+            thisNode.give_neighbour(neighbour_node)
     else:
         inputing = False
 
+for Node in graph:
+    
+    print("New node :", Node.value)
+    for neighbour in Node.neighbours:
+        print(neighbour.value)
 
-Q = LinearQueue(count*4)
-Q.enqueue(values_array[0])
 
-Been_in_Q = [0]
+Q = LinearQueue(len(graph)+1)
+Q.enqueue(graph[0])
+Been_in_Q = [graph[0]]
+graph[0].placeval = 0
+
 
 while Q.is_empty() == False:
     current = Q.dequeue()
-    for y in range(4):
-        neighbour = current.neighbours()[y]
+    for neighbour in current.neighbours:
         if neighbour != None:
             been_in = False
             for x in Been_in_Q:
@@ -75,7 +90,6 @@ while Q.is_empty() == False:
             if been_in == False:
                 Q.enqueue(neighbour)
                 Been_in_Q.append(neighbour)
-            print(current)
-            print(neighbour)
-        
-    print(current)
+                neighbour.placeval = 1 + current.placeval
+  
+    print(current.value, current.placeval)
