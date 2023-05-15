@@ -1,5 +1,13 @@
-from CountSortM import count_sort_radix
+from HeapPriorityQueueM import queue
 
-array = [88,73,44,1,8,19,31,63,74,54,19,3,7,0]
+Q = queue(5)
 
-print(count_sort_radix(array, 100))
+Q.enqueue("A",0)
+Q.enqueue("B",-2)
+Q.enqueue("C",-6)
+Q.enqueue("D",-1)
+Q.printqueue()
+print(Q.dequeue())
+print(Q.dequeue())
+print(Q.dequeue())
+print(Q.dequeue())

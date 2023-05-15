@@ -1,6 +1,4 @@
-
-
-class HeapPriorityQueue():
+class queue():
     def __init__(self, capacity):
         self.capacity = capacity
         self.queue = [(None,None)] * capacity
@@ -64,30 +62,3 @@ class HeapPriorityQueue():
     
     def is_empty(self):
         return self.numinqueue() == 0
-
-
-
-queue = HeapPriorityQueue(3)
-
-
-Exit = False
-while Exit == False:
-    print("1: Enqueue \n2: Dequeue \n3: Get Item at the Top of the Queue \n4: Print Queue \n5: Exit")
-    key = int(input("What would you like to do?: "))
-    if key == 1:
-        print("What would you like to Enqueue?")
-        Value = input("Enter Value: ")
-        Priority = int(input("Enter Priority: "))
-        queue.enqueue(Value, Priority)
-
-    elif key == 2:
-        print(queue.dequeue())
-    
-    elif key == 3:
-        print(queue.top())
-    
-    elif key == 4:
-        print(queue.printqueue())
-
-    else:
-        Exit = True
