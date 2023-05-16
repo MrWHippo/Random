@@ -11,6 +11,7 @@ class node():
         self.exit_time = None
         self.placeval = 0
         self.priority = 0
+        self.final = False
         
 
 
@@ -29,4 +30,7 @@ class node():
             count +=1
             if node.value == searchnode.value:
                 return count
+        
+    def checkfinal(self):
+        return self.final
     

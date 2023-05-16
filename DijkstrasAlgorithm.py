@@ -45,7 +45,7 @@ while inputting:
     else:
         inputting = False
 
-test = True
+test = False
 if test:
     for Node in graph:
         print("New node :", Node.value)
@@ -55,63 +55,20 @@ if test:
     print(graph2)
 
 
-Q = queue(len(graph)+1)
+Q = queue(len(graph)*10)
 Q.enqueue(graph[0], 0)
-beenDQ = []
-beenDQ_B = False
-
-runold = False
-
-if runold == True:
-    print("------------")
-    while Q.is_empty() == False:
-        current = Q.dequeue()
-        for neighbour in current[0].neighbours:
-            if neighbour != None:
-                for x in beenDQ:
-                    if x == neighbour:
-                        beenDQ_B = True
-
-                if beenDQ_B == False:
-                    beenDQ.append(neighbour)
-                    num = current[0].getplaceofweight(neighbour)
-                    neighbour.placeval = current[0].placeval - int(current[0].weightofneighbours[num])
-                    neighbour.priority = neighbour.placeval
-                    Q.enqueue(neighbour, -neighbour.priority)
-                beenDQ.append(current[0])
-                beenDQ_B = False
-    
-        print(current[0].value,  current[0].placeval)
-
-###### new
-else:
-    print("------------")
-    while Q.is_empty() == False:
-        current = Q.dequeue()
-        for neighbour in current[0].neighbours:
-            if neighbour != None:
-                
-
-
-                for x in beenDQ:
-                    if x == neighbour:
-                        beenDQ_B = True
-
-                if beenDQ_B == False:
-                    beenDQ.append(neighbour)
-                    num = current[0].getplaceofweight(neighbour)
-                    neighbour.placeval = current[0].placeval - int(current[0].weightofneighbours[num])
-                    neighbour.priority = neighbour.placeval
-                    Q.enqueue(neighbour, -neighbour.priority)
-                beenDQ.append(current[0])
-                beenDQ_B = False
-    
-        print(current[0].value,  current[0].placeval)
 
 
 while Q.is_empty()==False:
     current = Q.dequeue()
-    for neighbour in current[0].neighbours:
-        neighbour.placeval
-        neighbour.priority = neighbour.placeval
-        Q.enqueue(neighbour, -neighbour.priority)
+    if current[0].checkfinal() == False:
+        current[0].placeval = -current[1]
+        current[0].final = True
+        for neighbour in current[0].neighbours:
+            num = current[0].getplaceofweight(neighbour)
+            neighbour.placeval = current[0].placeval - int(current[0].weightofneighbours[num])
+            neighbour.priority = neighbour.placeval
+            Q.enqueue(neighbour, -neighbour.priority)
+        
+        print(current[0].value,  current[0].placeval)
+    
