@@ -60,6 +60,7 @@ Q.enqueue(graph[0], 0)
 
 
 while Q.is_empty()==False:
+    #print(Q.printqueue())
     current = Q.dequeue()
     if current[0].checkfinal() == False:
         current[0].placeval = -current[1]
