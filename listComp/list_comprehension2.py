@@ -10,7 +10,7 @@ def mult(current_total, num):
     return current_total * num
 
 def HCF(num1,num2):
-    
+    pass
 
 
 
